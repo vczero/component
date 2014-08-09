@@ -1,6 +1,6 @@
 
 var Calendar = function(div){
-	this.div = document.getElementById(div) || {width:800, height:600};
+	this.div = document.getElementById(div);
 };
 
 Calendar.week = ['星期一', '星期二','星期三', '星期四','星期五', '星期六', '星期日'];
@@ -8,10 +8,11 @@ Calendar.month = ['1月','2月','3月','4月','5月','6月','7月','8月','9月'
 
 Calendar.prototype.showUI = function(date){
 	var width = this.div.style.width || 800,
-	    height = this.div.style.height || 600,
-	    cell = {width: (parseInt(width) - 20)/7, height: (parseInt(height) - 20)/5},
+	    height = this.div.style.height || (600 - 30),
+	    cell = {width: (parseInt(width) - 20)/7, height: (parseInt(height) -30 - 20)/5},
 	    monthArr = this.monthPanel(date);
-	
+
+	this.addHeader(date);
 	for(var i = 0; i < 35; i++){
 		var cellDOM = document.createElement('div');
 		cellDOM.style.width = cell.width + 'px';
@@ -19,11 +20,23 @@ Calendar.prototype.showUI = function(date){
 		cellDOM.style.display = 'inline-block';
 		cellDOM.style.float = 'left';
 		cellDOM.style.border = '1px solid blue';
+		cellDOM.style.cursor = 'pointer';
 		cellDOM.innerHTML = monthArr[i].getDate();
 		this.div.appendChild(cellDOM);
 	}
 	
 };
+
+Calendar.prototype.addHeader = function(date){
+	var header = document.createElement('div');
+	header.style.height = '20px';
+	header.style.width = this.div.style.width || '800px';
+	header.style.textAlign = 'center';
+	header.style.fontWeight = 'bold';
+	header.innerHTML = date.getFullYear() + '年' + (date.getMonth() + 1) + '月';
+	console.log(header);
+	this.div.appendChild(header);
+}
 
 Calendar.prototype.monthPanel = function(date){
 	//如果传递了Date对象，则按Date对象进行计算月份面板
