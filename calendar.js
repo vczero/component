@@ -1,21 +1,28 @@
 
-var week = ['星期一', '星期二','星期三', '星期四','星期五', '星期六', '星期日'];
-var month = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
-
 var Calendar = function(div){
-	//this.div = document.getElementById(div) || {width:800, height:600};
+	this.div = document.getElementById(div) || {width:800, height:600};
 };
 
+Calendar.week = ['星期一', '星期二','星期三', '星期四','星期五', '星期六', '星期日'];
+Calendar.month = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+
 Calendar.prototype.showUI = function(date){
-	//width = this.div.width || 800,
-	//height = this.div.height || 600;
-	//cell = {width: width/7, height: height/5},
-	//创建单元格
-	//var cellDOM = document.createElement('div');
-	//cellDOM.style.width = cell.width + 'px';
-	//cellDOM.style.height = cell.height + 'px';
-	//cellDOM.style.display = 'inline-block';
-	//cellDOM.style.float = 'left';
+	var width = this.div.style.width || 800,
+	    height = this.div.style.height || 600,
+	    cell = {width: (parseInt(width) - 20)/7, height: (parseInt(height) - 20)/5},
+	    monthArr = this.monthPanel(date);
+	
+	for(var i = 0; i < 35; i++){
+		var cellDOM = document.createElement('div');
+		cellDOM.style.width = cell.width + 'px';
+		cellDOM.style.height = cell.height + 'px';
+		cellDOM.style.display = 'inline-block';
+		cellDOM.style.float = 'left';
+		cellDOM.style.border = '1px solid blue';
+		cellDOM.innerHTML = monthArr[i].getDate();
+		this.div.appendChild(cellDOM);
+	}
+	
 };
 
 Calendar.prototype.monthPanel = function(date){
@@ -51,8 +58,6 @@ Calendar.prototype.monthPanel = function(date){
     return preMonth;
 };
 
-var c = new Calendar('div');
-console.log(c.monthPanel(new Date(2014, 6, 12)));
 
 
 
