@@ -18,13 +18,14 @@ var Calendar = (function(){
 	};
 
 	Calendar.week = ['星期一', '星期二','星期三', '星期四','星期五', '星期六', '星期日'];
-	Calendar.prototype.getDate = null;
-	Calendar.prototype.showUI = function(){
+
+	Calendar.prototype.showUI = function(callback){
 		var exist = document.getElementById('vczero_celldom_0');
 		//如果存在节点：移除
 		if(!!exist){
 			for(var e = 0; e < 35; e++){
 				var node = document.getElementById('vczero_celldom_' + e);
+				node.onclick = null; //移除事件处理程序
 				this.div.removeChild(node);
 			}
 		}
@@ -39,6 +40,7 @@ var Calendar = (function(){
 		this.div.style.fontFamily = '微软雅黑';
 		this._addHeader();
 		this._addWeekday();
+
 		for(var i = 0; i < 35; i++){
 			var cellDOM = document.createElement('div');
 			cellDOM.style.width = cell.width + 'px';
@@ -59,17 +61,24 @@ var Calendar = (function(){
 			if(i < monthArr.preLen || i >= monthArr.currentLen + monthArr.preLen){
 				cellDOM.style.color = '#BFBFBF';
 			}
-			
-			cellDOM.addEventListener('click', this.getDate);
 			this.div.appendChild(cellDOM);
 		}
-		
-	};
 
+		var _that = this;
+		var _callback = callback;
+		this.div.addEventListener('click',function(e){
+			var node = e.target;
+			if(node.id.indexOf('vczero_celldom_') > -1){
+				var date = new Date(node.getAttribute('date')).toLocaleString();
+				_callback(date);
+			}
+		});
+	};
 
 	Calendar.prototype._addHeader = function(){
 		var exist = document.getElementById('vczero_datediv');
 		if(!!exist){
+			exist.onclick = null;
 			this.div.removeChild(exist);
 		}
 
@@ -146,6 +155,7 @@ var Calendar = (function(){
 		if(!!exist){
 			for(var i = 0; i < 7; i++){
 				var node = document.getElementById('vczero_week_' + i);
+				node.onclick = null;
 				this.div.removeChild(node);
 			}
 			

@@ -6,10 +6,9 @@
 		<script type="text/javascript">
 			function showCalendar(){
 				var c = new Calendar('calendar',new Date());
-				c.getDate = function(event){
-					alert(new Date(this.getAttribute('date')).toLocaleString());
-				};
-				c.showUI();
+				c.showUI(function(date){
+					console.log(date);
+				});
 			}
 		</script>
 	</head>
