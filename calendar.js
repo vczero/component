@@ -65,12 +65,12 @@ var Calendar = (function(){
 		}
 
 		var _that = this;
-		var _callback = callback;
+		//使用父元素事件委托
 		this.div.addEventListener('click',function(e){
 			var node = e.target;
 			if(node.id.indexOf('vczero_celldom_') > -1){
 				var date = new Date(node.getAttribute('date')).toLocaleString();
-				_callback(date);
+				callback(date);
 			}
 		});
 	};
