@@ -18,9 +18,7 @@ var Calendar = (function(){
 	};
 
 	Calendar.week = ['星期一', '星期二','星期三', '星期四','星期五', '星期六', '星期日'];
-
 	Calendar.prototype.getDate = null;
-
 	Calendar.prototype.showUI = function(){
 		var exist = document.getElementById('vczero_celldom_0');
 		//如果存在节点：移除
@@ -51,11 +49,15 @@ var Calendar = (function(){
 			cellDOM.style.textAlign = 'center';
 			cellDOM.id = 'vczero_celldom_' + i;
 			cellDOM.style.lineHeight = cell.height + 'px';
-			cellDOM.setAttribute('date',monthArr[i]); //设置日期对象到DOM属性date上
-			cellDOM.innerHTML = monthArr[i].getDate();
+			cellDOM.setAttribute('date',monthArr.date[i]); //设置日期对象到DOM属性date上
+			cellDOM.innerHTML = monthArr.date[i].getDate();
 			//去掉最后一行横线
 			if(i < 28){
 				cellDOM.style.borderBottom = '1px solid #C8CACC';
+			}
+
+			if(i < monthArr.preLen || i >= monthArr.currentLen + monthArr.preLen){
+				cellDOM.style.color = '#BFBFBF';
 			}
 			
 			cellDOM.addEventListener('click', this.getDate);
@@ -135,7 +137,6 @@ var Calendar = (function(){
 		dateDiv.appendChild(leftDiv);
 		dateDiv.appendChild(timeDiv);
 		dateDiv.appendChild(rightDiv);
-
 		this.div.appendChild(dateDiv);
 	}
 
@@ -183,6 +184,7 @@ var Calendar = (function(){
 		for(var p = firstCell; p > 0; p--){
 			preMonth.push(new Date(year, month - 1, preDays - p + 1));
 		}
+		var len = preMonth.length;
 		//本月
 		var currentMonth = [];
 		for(var c = 0; c < currentDays; c++){
@@ -195,23 +197,15 @@ var Calendar = (function(){
 	    }
 
 	    preMonth = preMonth.concat(currentMonth, nextMonth);
-	    return preMonth;
+	    return {
+	    	date: preMonth,
+	    	preLen: len,
+	    	currentLen: currentMonth.length
+	    };
 	};
 
 	return Calendar;
 
 })();
-
-
-
-
-
-
-
-
-
-
-
-
 
 
