@@ -5,12 +5,15 @@
 		<script type="text/javascript" src="calendar.js"></script>
 		<script type="text/javascript">
 			function showCalendar(){
-				var c = new Calendar('calendar');
-				c.showUI(new Date());
+				var c = new Calendar('calendar',new Date());
+				c.getDate = function(event){
+					alert(new Date(this.getAttribute('date')));
+				};
+				c.showUI();
 			}
 		</script>
 	</head>
 	<body onload="showCalendar()">
-		<div id="calendar" style="width:400px; height:300px;"></div>
+		<div id="calendar" style="width:390px; height:270px;"></div>
 	</body>
 </html>

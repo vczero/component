@@ -1,23 +1,39 @@
 
-var Calendar = function(div){
+var Calendar = function(div, date){
 	this.div = document.getElementById(div);
-	this.width = this.div.style.width || 800; //增加两变量
-	this.height = this.div.style.height || (600 - 30);
+	var w = this.div.style.width || 390;
+	var h = this.div.style.height || (300 - 30);
+	this.width = parseInt(w) >= 360 ? w : 360; 
+	this.height = parseInt(h) >= 180 ? h : 180;
+	this.date = date;
+	this.div.style.width = this.width + 'px'; //按默认值设置回去
+	this.div.style.height = this.height + 'px';//按默认值设置回去
+	this.tag = false;
 };
 
 Calendar.week = ['星期一', '星期二','星期三', '星期四','星期五', '星期六', '星期日'];
-Calendar.month = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
 
-Calendar.prototype.showUI = function(date){
+Calendar.prototype.getDate = null;
+
+Calendar.prototype.showUI = function(){
+	var exist = document.getElementById('vczero_celldom_0');
+	//如果存在节点：移除
+	if(!!exist){
+		for(var e = 0; e < 35; e++){
+			var node = document.getElementById('vczero_celldom_' + e);
+			this.div.removeChild(node);
+		}
+	}
+
 	var width = this.width,
 	    height = this.height,
 	    cell = {width: (parseInt(width) - 20)/7, height: (parseInt(height) -30 - 20)/5},
-	    monthArr = this._monthPanel(date);
+	    monthArr = this._monthPanel(this.date);
 	this.div.style.paddingLeft = '8px'; 
 	this.div.style.border = '2px solid #57ABFF';
 	this.div.style.cursor = 'default';
 	this.div.style.fontFamily = '微软雅黑';
-	this._addHeader(date);
+	this._addHeader();
 	this._addWeekday();
 	for(var i = 0; i < 35; i++){
 		var cellDOM = document.createElement('div');
@@ -27,32 +43,107 @@ Calendar.prototype.showUI = function(date){
 		cellDOM.style.float = 'left';
 		cellDOM.style.cursor = 'pointer';
 		cellDOM.style.textAlign = 'center';
+		cellDOM.id = 'vczero_celldom_' + i;
 		cellDOM.style.lineHeight = cell.height + 'px';
-		cellDOM.class = 'dateCell';
+		cellDOM.setAttribute('date',monthArr[i]); //设置日期对象到DOM属性date上
 		cellDOM.innerHTML = monthArr[i].getDate();
 		//去掉最后一行横线
 		if(i < 28){
 			cellDOM.style.borderBottom = '1px solid #C8CACC';
 		}
-
+		
+		cellDOM.addEventListener('click', this.getDate);
 		this.div.appendChild(cellDOM);
 	}
 	
 };
 
-Calendar.prototype._addHeader = function(date){
+
+Calendar.prototype._addHeader = function(){
+	var exist = document.getElementById('vczero_datediv');
+	if(!!exist){
+		this.div.removeChild(exist);
+	}
+
 	var header = document.createElement('div');
-	header.style.height = '20px';
+	header.style.height = '22px';
 	header.style.width = this.div.style.width || '800px';
-	header.style.textAlign = 'center';
-	header.style.fontWeight = 'bold';
-	header.innerHTML = date.getFullYear() + '年' + (date.getMonth() + 1) + '月';
-	console.log(header);
-	this.div.appendChild(header);
+
+	//包含左 时间 右的大DIV
+	var dateDiv = document.createElement('div');
+	dateDiv.style.width = '200px';
+	dateDiv.style.height = '22px';
+	dateDiv.style.margin = '0 auto';
+	dateDiv.style.textAlign = 'center';
+	dateDiv.style.fontWeight = 'bold';
+	dateDiv.id = 'vczero_datediv'
+
+	//< DIV
+	var leftDiv = document.createElement('div');
+	leftDiv.innerHTML = '<';
+	leftDiv.style.display = 'inline-block';
+	leftDiv.style.float = 'left';
+	leftDiv.style.width = '50px';
+	leftDiv.style.cursor = 'pointer';
+	leftDiv.style.color = '#C5BFBF';
+	var _that = this; //获取到this对象
+	leftDiv.addEventListener('click', function(event){
+		var year = parseInt(_that.date.getFullYear()),
+			month = parseInt(_that.date.getMonth());
+		if(month === 0){
+			_that.date = new Date(year - 1, 11, 1);
+		}else{
+			_that.date = new Date(year, month - 1, 1);
+		}
+		_that.showUI();
+		
+	});
+
+	//> DIV
+	var rightDiv = document.createElement('div');
+	rightDiv.innerHTML = '>';
+	rightDiv.style.display = 'inline-block';
+	rightDiv.style.float = 'left';
+	rightDiv.style.width = '50px';
+	rightDiv.style.cursor = 'pointer';
+	rightDiv.style.color = '#C5BFBF';
+	rightDiv.addEventListener('click', function(event){
+		var year = parseInt(_that.date.getFullYear()),
+			month = parseInt(_that.date.getMonth());
+		if(month === 11){
+			_that.date = new Date(year + 1, 0, 1);
+		}else{
+			_that.date = new Date(year, month + 1, 1);
+		}
+		_that.showUI();
+	});
+
+
+	//显示月份的DIV
+	var timeDiv = document.createElement('div');
+	timeDiv.style.display = 'inline-block';
+	timeDiv.style.float = 'left';
+	timeDiv.style.width = '100px';
+	timeDiv.innerHTML = this.date.getFullYear() + '年' + (this.date.getMonth() + 1) + '月';
+
+	dateDiv.appendChild(leftDiv);
+	dateDiv.appendChild(timeDiv);
+	dateDiv.appendChild(rightDiv);
+
+	this.div.appendChild(dateDiv);
 }
 
 //增加星期
 Calendar.prototype._addWeekday = function(){
+	var exist = document.getElementById('vczero_week_0');
+	if(!!exist){
+		for(var i = 0; i < 7; i++){
+			var node = document.getElementById('vczero_week_' + i);
+			this.div.removeChild(node);
+		}
+		
+	}
+
 	for(var i = 0; i < 7; i++){
 		var weekday = document.createElement('div');
 		weekday.style.width = (parseInt(this.width) - 20)/7 + 'px';
@@ -61,6 +152,8 @@ Calendar.prototype._addWeekday = function(){
 		weekday.style.float = 'left';
 		weekday.style.color = '#BFBFBF';
 		weekday.style.fontWeight = 'bold';
+		weekday.style.textAlign = 'center';
+		weekday.id = 'vczero_week_' + i;
 		weekday.innerHTML = Calendar.week[i];
 		this.div.appendChild(weekday);
 	}
