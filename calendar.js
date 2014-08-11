@@ -19,7 +19,7 @@ var Calendar = (function(){
 
 	Calendar.week = ['星期一', '星期二','星期三', '星期四','星期五', '星期六', '星期日'];
 
-	Calendar.prototype.showUI = function(callback){
+	Calendar.prototype['showUI'] = function(callback){
 		var exist = document.getElementById('vczero_celldom_0');
 		//如果存在节点：移除
 		if(!!exist){
@@ -112,7 +112,7 @@ var Calendar = (function(){
 			}else{
 				_that.date = new Date(year, month - 1, 1);
 			}
-			_that.showUI(function(){});
+			_that['showUI'](function(){});
 			
 		});
 
@@ -132,7 +132,7 @@ var Calendar = (function(){
 			}else{
 				_that.date = new Date(year, month + 1, 1);
 			}
-			_that.showUI(function(){});
+			_that['showUI'](function(){});
 		});
 
 
