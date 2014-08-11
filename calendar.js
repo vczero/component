@@ -112,7 +112,7 @@ var Calendar = (function(){
 			}else{
 				_that.date = new Date(year, month - 1, 1);
 			}
-			_that.showUI();
+			_that.showUI(function(){});
 			
 		});
 
@@ -132,7 +132,7 @@ var Calendar = (function(){
 			}else{
 				_that.date = new Date(year, month + 1, 1);
 			}
-			_that.showUI();
+			_that.showUI(function(){});
 		});
 
 
