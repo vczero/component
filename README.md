@@ -1,4 +1,4 @@
-用原生JS写UI组件
+####用原生JavaScript写UI组件
 ====  
 (1)日历       
 ![Alt text](./imgs/calendar.png)    
