@@ -1,7 +1,18 @@
-var vcharts = function(option){
+/*
+柱状图
+*/
 
+var histogram = function(option, div){
+    var option = option;
+    /*定义初始化执行动作*/
+    function do(){
+        //1、绘制UI
+        //2、UI可缩放
+        //3、根据具体参数添加组件
+    }
+    /*执行*/
+    do();
 }
-
 
 
 
