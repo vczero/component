@@ -1,18 +1,80 @@
 /*
 柱状图
 */
+var Num = {};
+//均值
+Num.average = function(arr){
+    var n = arr.length,
+        sum = 0;
+    for(var i = 0; i < n; i++){
+        sum += arr[i];
+    }
+    return sum / n;
+}
+//和
+Num.sum = function(arr){
+    var n = arr.length,
+        sum = 0;
+    for(var i = 0; i < n; i++){
+        sum += arr[i];
+    }
+    return sum;
+}
+//平方
+Num.sqrt = function(arr){
+    var n = arr.length,
+        values = [];
+    for(var i = 0; i < n; i++){
+        values.push(Math.sqrt(arr[i]));
+    }
+    return values;
+}
 
-var histogram = function(option, div){
+var Histogram = function(option, div){
     var option = option;
     /*定义初始化执行动作*/
-    function do(){
+    function draw(){
         //1、绘制UI
+        Histogram.addBaseUI();
         //2、UI可缩放
         //3、根据具体参数添加组件
     }
     /*执行*/
-    do();
+    draw();
 }
+
+//添加基础UI
+Histogram.addBaseUI = function(){
+    
+};
+
+//添加tooltip
+Histogram.addTooltip = function(){
+
+}
+
+//添加legend
+Histogram.addLegend = function(){
+
+}
+
+//添加X轴
+Histogram.addXAxis = function(){
+
+}
+
+//添加y轴
+Histogram.addYAxis = function(){
+
+}
+
+//增加数据系列
+Histogram.addSeries = function(){
+
+}
+
+
+
 
 
 
