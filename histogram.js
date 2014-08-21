@@ -29,6 +29,29 @@ Num.sqrt = function(arr){
     }
     return values;
 }
+//最小值
+Num.min = function(arr){
+    var n = arr.length,
+        min = arr[0];
+    for(var i = 1; i < n; i++){
+        if(arr[i] <= min){
+            min = arr[i];
+        }
+    }
+    return min;
+}
+//最大值
+Num.max = function(arr){
+    var n = arr.length,
+        max = arr[0];
+    for(var i = 1; i < n; i++){
+        if(arr[i] >= max){
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
 
 var Histogram = function(option, div){
     var option = option;
