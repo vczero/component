@@ -5,7 +5,7 @@
 		<script type="text/javascript" src="calendar.js"></script>
 		<script type="text/javascript">
 			function showCalendar(){
-				var c = new Calendar('calendar',new Date());
+                var c = new Calendar('calendar',new Date('2013-12'));
 				c.showUI(function(date){
 					console.log(date);
 				});
@@ -13,6 +13,6 @@
 		</script>
 	</head>
 	<body onload="showCalendar()">
-		<div id="calendar" style="width:390px; height:270px;"></div>
+		<div id="calendar" style="width:390px; height:300px;"></div>
 	</body>
 </html>
