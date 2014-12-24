@@ -5,7 +5,7 @@
 @desc:简易日历组件
 +------------------------------
 */
-var Calendar = (function(){
+(function(global){
 	var Calendar = function(div, date){
 		this.div = document.getElementById(div);
 		var w = this.div.style.width || 390;
@@ -212,8 +212,8 @@ var Calendar = (function(){
 	    };
 	};
 
-	return Calendar;
+	global.Calendar = Calendar;
 
-})();
+})(window);
 
 
