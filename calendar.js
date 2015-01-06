@@ -68,7 +68,7 @@
 			var node = e.target;
 			if(node.id.indexOf('vczero_celldom_') > -1){
 				var date = new Date(node.getAttribute('date')).toLocaleString();
-				callback(date);
+				callback(date.split('上午')[0]);
 			}
 		});
 	};
