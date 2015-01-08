@@ -1,13 +1,10 @@
-组件
------------------------ 
-#####1. 日历       
-![日历](./imgs/calendar.png)    
-文件：calendar.js    
-例子：calendar.html     
-在线Demo：http://vczero.github.io/ui/calendar.html
+Simple Demo for JS component
+---------------------------------------
+[链接地址](http://vczero.github.io/component/index.html)   
 
-####2. 提示        
-![提示](./imgs/tip.png)     
-文件： tip.js
-   
++ 日历组件
++ GUID类库    
++ cookie组件 
++ 提示信息Demo
++ 遮罩demo       
 
