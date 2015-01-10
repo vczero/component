@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>tip</title>
+	</head>
+	<body style="margin:0;">
+		<div style="height:50px;"></div>
+		<div style="width:260px;height:400px;margin:100px auto;">
+			<div id="tip" style="border:1px solid #4D91D1;">
+				鼠标移动到这里，将会显示我的头像
+			</div>
+		</div>
+		<script type="text/javascript" src="tip.js"></script>
+		<script type="text/javascript">
+			Tip('tip', {
+				content: '<img src="avatar.png"/>',
+				height: 233,
+				width: 227
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>写一些工具类或者效果</title>
+		<link type="text/css" rel="stylesheet" href="css/main.css"/>
+	</head>
+	<body>
+		<header>
+			<ul>
+				<li>纯属自己玩</li>
+				<li><a href="https://github.com/vczero/component">GitHub</a></li>
+			</ul>
+		</header>
+		
+		<section class="item_list">
+			<div id="calendar_menu">canlendar</div>
+			<div id="guid">guid</div>
+			<div id="cookie">cookie</div>
+			<div id="tip">tip</div>
+			<div id="mask">mask</div>
+		</section>
+		
+		<section class="codeshow hide" id="calendar_codeshow">
+			<div class="code fl">
+				<img src="img/calendar.png"/>
+			</div>
+			<div class="show fl">
+				<div id="calendar"></div>
+				<div id="calendar_info">
+					<br/>
+					<span id="calendar_time">点击日历上的日期试试</span>
+				</div>
+			</div>
+		</section>
+		
+		<section class="codeshow hide" id="guid_codeshow">
+			<div class="code fl">
+				<img src="img/guid.png"/>
+			</div>
+			<div class="show fl">
+				<div>
+					<textarea id="guid_textarea"></textarea>
+				</div>
+				<div id="guid_genrator">创建GUID</div>
+			</div>
+		</section>
+		
+		<section class="codeshow hide" id="cookie_codeshow">
+			<div class="code fl">
+				<img src="img/cookie.png"/>
+			</div>
+			<div class="show fl cookie_text">
+				<div>
+					name <input id="cookie_name" type="text" />
+					value <input id="cookie_value" type="text" />
+				</div>
+				<div id="setCookie">设置cookie</div>
+				<div>
+					<textarea id="allCookie"></textarea>
+				</div>
+			</div>
+		</section>
+		
+		<section class="codeshow hide" id="tip_codeshow">
+			<div class="code fl">
+				<img src="img/tip.png"/>
+			</div>
+			<div class="show fl tip_div">
+				<div>
+					<div id="tip_avatar">
+						鼠标移动到这，将会显示头像
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<div id="mask_container" style="width:846px;height:400px;position:absolute;top:70px;left:240px;">
+			<section id="mask_codeshow">
+				<div>
+					<div class="code fl">
+						<img src="img/mask.png"/>
+					</div>
+					<div class="show fl mask_div">
+						<img src="img/guxiang.png"/>
+					</div>
+				</div>
+			</section>
+		</div>
+		
+		<script type="text/javascript" src="js/calendar.js" ></script>
+		<script type="text/javascript" src="js/guid.js" ></script>
+		<script type="text/javascript" src="js/cookie.js" ></script>
+		<script type="text/javascript" src="js/tip.js"></script>
+		<script type="text/javascript" src="js/mask.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>
